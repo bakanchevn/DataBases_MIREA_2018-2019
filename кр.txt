@@ -1,0 +1,68 @@
+select count(distinct model)
+from printer
+
+select count(model)
+from product 
+where type = 'Printer'  
+
+
+select p.maker, 
+       avg(pc.price)
+  from pc 
+  join product p 
+    on p.model = pc.model
+group by p.maker
+
+select 
+  case when avg_pc > avg_printer
+         then 'PC'
+       else 'Printer'
+  end name,
+  abs(avg_pc - avg_printer)
+from 
+(select avg(price) avg_pc
+  from pc),
+(select avg(price) avg_printer
+from printer)
+
+
+
+select case when pr.color = 'y'
+            then p.maker
+       else cast (pr.price as varchar)
+       end 
+  from printer pr 
+  join product p 
+    on pr.model = p.model 
+
+1 3
+1 2
+2 3
+
+
+delete 
+from pc 
+where price > 200
+
+update pc 
+  set price = price * 1.15
+where ram > 2 * 1024
+
+
+
+select * 
+from pc
+join product p1 
+on pc.model = p1.model 
+where price > 
+  (select avg(price) 
+   from laptop l 
+   join product p2
+     on p2.model = l.model 
+   where p2.maker = p1.maker)
+
+
+
+
+
+
